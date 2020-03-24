@@ -4,8 +4,28 @@ $windowPadding: 0;
 $headingcolor: white;
 $infiniteAniAttr: infinite linear;
 $homeAniAttr: 10s $infiniteAniAttr;
+$breakpoint-mobile: 335px;
+$breakpoint-tablet: 758px;
+$breakpoint-desktop: 1024px;
 
 // @Mixins
+@mixin mobile {
+    @media (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet - 1px}) {
+      @content;
+    }
+  }
+  
+  @mixin tablet {
+    @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
+      @content;
+    }
+  }
+  
+  @mixin desktop {
+    @media (min-width: #{$breakpoint-desktop}) {
+      @content;
+    }
+  }
 
 @mixin position($x,$y,$z) {
     position: absolute;
@@ -58,159 +78,464 @@ html{
     height: 100%;
 }
 body{
-    @include box-sizing(auto, 100%, $windowMargin, $windowPadding);
+    @include box-sizing(100%, 100%, $windowMargin, $windowPadding);
     background: rgb(176, 207, 211);
     border-bottom: 14px solid gray;
     box-sizing: border-box;
     overflow: hidden;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 
 // custom element
-.cl1{
-    @include box-sizing(23%, 23%, 0, 0);
-    @include backgroundImg("../images/main/cl1.png", 0, 0, 100%, 100%);
-    @include position(15%, 5%, 3);
-    animation: cl1-move $homeAniAttr;
-}
-.cl2{
-    @include box-sizing(24%, 30%, 0, 0);
-    @include backgroundImg("../images/main/cl2.png", 0, 0, 100%, 100%);
-    @include position(15%, 68%, 3);
-    animation: cl2-move $homeAniAttr;
-}
-.delivery{
-    @include box-sizing(12%, 21%, 0, 0);
-    @include backgroundImg("../images/main/delivery.png", 0, 0, 100%, 100%);
-    @include position(77.7%, 0, 20);
-    animation:delivery $homeAniAttr;
-}
-.chat
-{
-    @include position(63%, 71%, 10);
-    @include box-sizing(12%, 12%, 0, 0);
-    @include setFont(4vh, bold, 280%, center);
-    background: #FFFFFF;
-    border-radius: 12%;
-    animation: chat 10s infinite linear;
-    &:after
+@include desktop(){
+    .cl1{
+        @include box-sizing(23%, 23%, 0, 0);
+        @include backgroundImg("../images/main/cl1.png", 0, 0, 100%, 100%);
+        @include position(15%, 5%, 3);
+        animation: cl1-move $homeAniAttr;
+    }
+    .cl2{
+        @include box-sizing(24%, 30%, 0, 0);
+        @include backgroundImg("../images/main/cl2.png", 0, 0, 100%, 100%);
+        @include position(15%, 68%, 3);
+        animation: cl2-move $homeAniAttr;
+    }
+    .delivery{
+        @include box-sizing(12%, 21%, 0, 0);
+        @include backgroundImg("../images/main/delivery.png", 0, 0, 100%, 100%);
+        @include position(77.7%, 0, 20);
+        animation:delivery $homeAniAttr;
+    }
+    .chat
     {
-        content: '';
-        @include position(100%, 19%, 1);
-        @include box-sizing(0);
-        border-style: solid;
-        border-width: 40px 17px 0;
-        border-color: #FFFFFF transparent;
-        display: block;
-        
-    }
-}
-
-.streetlight{
-    @include box-sizing(10%, 28%, 0, 0);
-    @include backgroundImg("../images/main/streetlight.png", 0, 0, 100%, 100%);
-    @include position(70.6%, 3%, 19);
-    animation: streetlight 10s infinite linear;
-}
-
-
-.App-main{
-    @include box-sizing(23%, 44%, 0,0);
-    @include position(50%, 50%, 20);
-    text-align: center;
-    border: 4px solid $headingcolor;
-    border-radius:20%;
-    background-color: pink;
-    h1{
-        @include setFont(7vmin, none, auto, none, $headingcolor)
-    }
-    p{
-        font-size: 2.5vh;
-    }
-    button{
-        display: inline-block;
-        @include box-sizing(15vh, 15vh, auto, auto);
-        background: url("../images/main/lunch.png") 0 0/100% 100% no-repeat;
-        border: 0;
-        outline: 0;
-        &:hover{
-            animation: rotate 3s infinite linear;
+        @include position(63%, 71%, 10);
+        @include box-sizing(10%, 12%, 0, 0);
+        @include setFont(3vw, bold, 280%, center);
+        background: #FFFFFF;
+        border-radius: 12%;
+        animation: chat 10s infinite linear;
+        &:after
+        {
+            content: '';
+            @include position(100%, 19%, 1);
+            @include box-sizing(0);
+            border-style: solid;
+            border-width: 40px 17px 0;
+            border-color: #FFFFFF transparent;
+            display: block;
+            
         }
     }
-}
 
-#popup {
-    @include position(50%,50% , 21);
-    @include box-sizing(100%, 100%, 0, 0);
-    display: none; /*숨기기*/
-    background: rgba(0,0,0,0.9);
-    >h1{
-        @include position( 1%, 50%, 15); 
-        @include setFont(9vh, none, auto, none, pink); 
-        transform: translate(-50%);
+    .streetlight{
+        @include box-sizing(10%, 28%, 0, 0);
+        @include backgroundImg("../images/main/streetlight.png", 0, 0, 100%, 100%);
+        @include position(70.6%, 3%, 19);
+        animation: streetlight 10s infinite linear;
     }
-    #popmenu {
-        @include position(50%, 50%, 0);
-        @include box-sizing(30%, 60%, auto, auto);
-        text-align: left;
-        background: #fff;
-        border-radius: 10%;
-        border: 3px double ;
-        h1 {
-            margin-top: 3%;
-            margin-left: 8%;
-            @include setFont(5vh, bold);
-            span{
-                @include setFont(3vh, none, auto, none, #007aae);
-            }
-          }
-          img{
-            @include box-sizing(80%, 50%, auto, auto);
-            margin-left: 8%;
-            border-radius: 20px;           
+
+
+    .App-main{
+        @include box-sizing(26vw, 50%, 0,0);
+        @include position(50%, 50%, 20);
+        text-align: center;
+        min-width: 500px;
+        border: 4px solid $headingcolor;
+        border-radius:20%;
+        background-color: pink;
+        h1{
+            @include setFont(7vmin, none, auto, none, $headingcolor)
         }
         p{
-            margin-left: 8%;
-            font-size: 2.4vh;    
+            font-size: 2vw;
         }
-        >a{
-            @include setFont(3vh, bold, auto, none, aqua);
-            position: relative;
-            left: 30%;
-            text-decoration: none;
-            &:visited{
-                color: blue;
-            }
+        button{
+            display: inline-block;
+            @include box-sizing(20vh, 20vh, auto, auto);
+            background: url("../images/main/lunch.png") 0 0/100% 100% no-repeat;
+            border: 0;
+            outline: 0;
             &:hover{
-                color: red;
-            }
-            &:after{
-                @include backgroundImg("../images/main/search.png", 0px, 0px, 100%, 100%);
-                @include box-sizing(5%, 5%);
-                content: "";
-                display: inline-block;
-                margin-left: 1%;
-            }
-        }
-        .exit {
-            @include position(88%, 50%, 0);
-            @include box-sizing(20%, 10%);
-            @include setFont(3vh, none, 200%, center);
-            transform: translate(-50%,0);
-            background: #007AAE;
-            border-radius: 25px;
-            cursor: pointer;
-            
-            &:hover{
-                background: darken($color: #007AAE, $amount: 30%);
+                animation: rotate 3s infinite linear;
             }
         }
     }
+
+    #popup {
+        @include position(50%,50% , 21);
+        @include box-sizing(100%, 100%, 0, 0);
+        display: none; /*숨기기*/
+        background: rgba(0,0,0,0.9);
+        >h1{
+            @include position( 0.02%, 50%, 15); 
+            @include setFont(9vmin, none, auto, none, pink); 
+            transform: translate(-50%);
+        }
+        #popmenu {
+            @include position(50%, 50%, 0);
+            @include box-sizing(37vw, 67vh, auto, auto);
+            min-width: 650px;
+            text-align: left;
+            background: #fff;
+            border-radius: 10%;
+            border: 3px double ;
+            h1 {
+                margin-top: 3%;
+                margin-left: 8%;
+                @include setFont(5vh, bold);
+                span{
+                    @include setFont(2vw, none, auto, none, #007aae);
+                }
+            }
+            img{
+                @include box-sizing(80%, 50%, auto, auto);
+                margin-left: 8%;
+                border-radius: 20px;           
+            }
+            p{
+                margin-left: 8%;
+                font-size: 2.4vh;    
+            }
+            >a{
+                @include setFont(3vh, bold, auto, none, aqua);
+                position: relative;
+                left: 50%;
+                margin-left: -7vw;
+                text-decoration: none;
+                &:visited{
+                    color: blue;
+                }
+                &:hover{
+                    color: red;
+                }
+                &:after{
+                    @include backgroundImg("../images/main/search.png", 0px, 0px, 100%, 100%);
+                    @include box-sizing(5%, 5%);
+                    content: "";
+                    display: inline-block;
+                    margin-left: 1%;
+                }
+            }
+            .exit {
+                @include position(88%, 50%, 0);
+                @include box-sizing(20%, 10%);
+                @include setFont(3vh, none, 200%, center);
+                transform: translate(-50%,0);
+                background: #007AAE;
+                border-radius: 25px;
+                cursor: pointer;
+                
+                &:hover{
+                    background: darken($color: #007AAE, $amount: 30%);
+                }
+            }
+        }
+    }
+
+    .light{
+        animation: lighting-box 3s infinite linear;
+    }
 }
 
-.light{
-    animation: lighting-box 3s infinite linear;
+@include tablet(){
+    .cl1{
+        @include box-sizing(30%, 26%, 0, 0);
+        @include backgroundImg("../images/main/cl1.png", 0, 0, 100%, 100%);
+        @include position(15%, 5%, 3);
+        animation: cl1-move $homeAniAttr;
+    }
+    .cl2{
+        @include box-sizing(32%, 26%, 0, 0);
+        @include backgroundImg("../images/main/cl2.png", 0, 0, 100%, 100%);
+        @include position(15%, 68%, 3);
+        animation: cl2-move $homeAniAttr;
+    }
+    .delivery{
+        @include box-sizing(12%, 15%, 0, 0);
+        @include backgroundImg("../images/main/delivery.png", 0, 0, 100%, 100%);
+        @include position(84%, 0, 20);
+        animation:delivery $homeAniAttr;
+    }
+    .chat
+    {
+        @include position(70%, 71%, 10);
+        @include box-sizing(19%, 12%, 0, 0);
+        @include setFont(4vh, bold, 280%, center);
+        background: #FFFFFF;
+        border-radius: 12%;
+        animation: chat 10s infinite linear;
+        &:after
+        {
+            content: '';
+            @include position(100%, 19%, 1);
+            @include box-sizing(0);
+            border-style: solid;
+            border-width: 40px 17px 0;
+            border-color: #FFFFFF transparent;
+            display: block;
+            
+        }
+    }
+
+    .streetlight{
+        @include box-sizing(10%, 23%, 0, 0);
+        @include backgroundImg("../images/main/streetlight.png", 0, 0, 100%, 100%);
+        @include position(75.7%, 3%, 19);
+        animation: streetlight 10s infinite linear;
+    }
+
+
+    .App-main{
+        @include box-sizing(52%, 52%, 0,0);
+        @include position(50%, 50%, 20);
+        min-width: 500px;
+        text-align: center;
+        border: 4px solid $headingcolor;
+        border-radius:20%;
+        background-color: pink;
+        h1{
+            @include setFont(8vmin, none, auto, none, $headingcolor)
+        }
+        p{
+            font-size: 4vw;
+        }
+        button{
+            display: inline-block;
+            @include box-sizing(18vh, 18vh, auto, auto);
+            background: url("../images/main/lunch.png") 0 0/100% 100% no-repeat;
+            border: 0;
+            outline: 0;
+            &:hover{
+                animation: rotate 3s infinite linear;
+            }
+        }
+    }
+
+    #popup {
+        @include position(50%,50% , 21);
+        @include box-sizing(100%, 100%, 0, 0);
+        display: none; /*숨기기*/
+        background: rgba(0,0,0,0.9);
+        >h1{
+            @include position( 1%, 50%, 15); 
+            @include setFont(9vw, none, auto, none, pink); 
+            transform: translate(-50%);
+        }
+        #popmenu {
+            @include position(50%, 50%, 0);
+            @include box-sizing(72%, 60%, auto, auto);
+            min-width: 490px;
+            text-align: left;
+            background: #fff;
+            border-radius: 10%;
+            border: 3px double ;
+            h1 {
+                margin-top: 3%;
+                margin-left: 8%;
+                @include setFont(5vh, bold);
+                span{
+                    @include setFont(4vw, none, auto, none, #007aae);
+                }
+            }
+            img{
+                @include box-sizing(80%, 50%, auto, auto);
+                margin-left: 8%;
+                border-radius: 20px;           
+            }
+            p{
+                margin-left: 8%;
+                font-size: 2.4vh;    
+            }
+            >a{
+                @include setFont(3vh, bold, auto, none, aqua);
+                position: relative;
+                left: 30%;
+                text-decoration: none;
+                &:visited{
+                    color: blue;
+                }
+                &:hover{
+                    color: red;
+                }
+                &:after{
+                    @include backgroundImg("../images/main/search.png", 0px, 0px, 100%, 100%);
+                    @include box-sizing(5%, 5%);
+                    content: "";
+                    display: inline-block;
+                    margin-left: 1%;
+                }
+            }
+            .exit {
+                @include position(88%, 50%, 0);
+                @include box-sizing(20%, 10%);
+                @include setFont(3vh, none, 200%, center);
+                transform: translate(-50%,0);
+                background: #007AAE;
+                border-radius: 25px;
+                cursor: pointer;
+                
+                &:hover{
+                    background: darken($color: #007AAE, $amount: 30%);
+                }
+            }
+        }
+    }
+
+    .light{
+        animation: lighting-box 3s infinite linear;
+    }
 }
+
+@include mobile(){
+    .cl1{
+        @include box-sizing(34%, 18%, 0, 0);
+        @include backgroundImg("../images/main/cl1.png", 0, 0, 100%, 100%);
+        @include position(15%, 5%, 3);
+        animation: cl1-move $homeAniAttr;
+    }
+    .cl2{
+        @include box-sizing(34%, 20%, 0, 0);
+        @include backgroundImg("../images/main/cl2.png", 0, 0, 100%, 100%);
+        @include position(15%, 68%, 3);
+        animation: cl2-move $homeAniAttr;
+    }
+    .delivery{
+        @include box-sizing(12.5%, 14%, 0, 0);
+        @include backgroundImg("../images/main/delivery.png", 0, 0, 100%, 100%);
+        @include position(85%, 0, 20);
+        animation:delivery $homeAniAttr;
+    }
+    .chat
+    {
+        @include position(74%, 70%, 10);
+        @include box-sizing(20%, 10%, 0, 0);
+        @include setFont(3.5vh, bold, 280%, center);
+        background: #FFFFFF;
+        border-radius: 12%;
+        animation: chat 10s infinite linear;
+        &:after
+        {
+            content: '';
+            @include position(100%, 19%, 1);
+            @include box-sizing(0);
+            border-style: solid;
+            border-width: 30px 17px 0;
+            border-color: #FFFFFF transparent;
+            display: block;
+            
+        }
+    }
+
+    .streetlight{
+        @include box-sizing(10%, 22%, 0, 0);
+        @include backgroundImg("../images/main/streetlight.png", 0, 0, 100%, 100%);
+        @include position(76.7%, 3%, 19);
+        animation: streetlight 10s infinite linear;
+    }
+
+
+    .App-main{
+        @include box-sizing(70%, 50%, 0,0);
+        @include position(50%, 50%, 20);
+        min-width: 450px;
+        text-align: center;
+        border: 4px solid $headingcolor;
+        border-radius:20%;
+        background-color: pink;
+        h1{
+            @include setFont(10vmin, none, auto, none, $headingcolor)
+        }
+        p{
+            font-size: 5vw;
+        }
+        button{
+            display: inline-block;
+            @include box-sizing(20vh, 20vh, auto, auto);
+            background: url("../images/main/lunch.png") 0 0/100% 100% no-repeat;
+            border: 0;
+            outline: 0;
+            &:hover{
+                animation: rotate 3s infinite linear;
+            }
+        }
+    }
+
+    #popup {
+        @include position(50%,50% , 21);
+        @include box-sizing(100%, 100%, 0, 0);
+        display: none; /*숨기기*/
+        background: rgba(0,0,0,0.9);
+        >h1{
+            @include position( 1%, 50%, 15); 
+            @include setFont(9vw, none, auto, none, pink); 
+            transform: translate(-50%);
+        }
+        #popmenu {
+            @include position(50%, 50%, 0);
+            @include box-sizing(75%, 60%, auto, auto);
+            text-align: left;
+            background: #fff;
+            border-radius: 10%;
+            border: 3px double ;
+            h1 {
+                margin-top: 3%;
+                margin-left: 8%;
+                @include setFont(5vh, bold);
+                span{
+                    @include setFont(2.5vh, none, auto, none, #007aae);
+                }
+            }
+            img{
+                @include box-sizing(80%, 50%, auto, auto);
+                margin-left: 8%;
+                border-radius: 20px;           
+            }
+            p{
+                margin-left: 8%;
+                font-size: 2.4vh;    
+            }
+            >a{
+                @include setFont(3vh, bold, auto, none, aqua);
+                position: relative;
+                left: 30%;
+                text-decoration: none;
+                &:visited{
+                    color: blue;
+                }
+                &:hover{
+                    color: red;
+                }
+                &:after{
+                    @include backgroundImg("../images/main/search.png", 0px, 0px, 100%, 100%);
+                    @include box-sizing(5%, 5%);
+                    content: "";
+                    display: inline-block;
+                    margin-left: 1%;
+                }
+            }
+            .exit {
+                @include position(88%, 50%, 0);
+                @include box-sizing(20%, 10%);
+                @include setFont(3vh, none, 200%, center);
+                transform: translate(-50%,0);
+                background: #007AAE;
+                border-radius: 25px;
+                cursor: pointer;
+                
+                &:hover{
+                    background: darken($color: #007AAE, $amount: 30%);
+                }
+            }
+        }
+    }
+
+    .light{
+        animation: lighting-box 3s infinite linear;
+    }
+}
+
 .load-box{
     @include position(50%,50% , 21);
     @include box-sizing(100%, 100%, 0, 0);
@@ -347,6 +672,7 @@ body{
         left: 150%;
     }
 }
+
 @keyframes chat{
     0%{
         opacity: 0;
