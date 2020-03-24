@@ -21,7 +21,7 @@ class App extends Component {
         { id: 4, name: "새마을식당", food: "#김치찌개 #고기", img: "images/shops/saema.jpeg", url: "https://store.naver.com/restaurants/detail?id=13374695" },
         { id: 5, name: "김가네", food: "#찌개 #분식 #여러가지 음식", img: "images/shops/kimga.jpeg", url: "https://store.naver.com/restaurants/detail?id=37274681" },
         { id: 6, name: "놀부 부대찌개", food: "#부대찌개", img: "images/shops/nolboo.jpeg", url: "https://store.naver.com/restaurants/detail?id=11803440" },
-        { id: 7, name: "유가네 닭갈비", food: "#숯불 닭갈비 #볶음밥", img: "images/shops/ugan.jpeg", url: "https://store.naver.com/restaurants/detail?id=20717283" },
+        { id: 7, name: "유가네 닭갈비", food: "#숯불 닭갈비", img: "images/shops/ugan.jpeg", url: "https://store.naver.com/restaurants/detail?id=20717283" },
         { id: 8, name: "삼백돈", food: "#돈까스 #스윙스", img: "images/shops/samback.jpeg", url: "https://store.naver.com/restaurants/detail?id=648063703" },
         { id: 9, name: "역전우동0410", food: "#우동 #모밀", img: "images/shops/udong.jpg", url: "https://store.naver.com/restaurants/detail?entry=plt&id=1413485809&query=%EC%97%AD%EC%A0%84%EC%9A%B0%EB%8F%990410%20%EA%B4%80%EC%95%85%EA%B5%AC%EC%B2%AD%EC%A0%90" },
         { id: 10, name: "kfc", food: "#타워버거 #치킨", img: "images/shops/kfc.jpg", url: "https://store.naver.com/restaurants/detail?id=35609542" },
